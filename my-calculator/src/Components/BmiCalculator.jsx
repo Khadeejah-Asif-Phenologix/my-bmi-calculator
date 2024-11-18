@@ -16,11 +16,12 @@ export default function App(){
       setBMI('Your BMI is ' + bmi.toFixed(2));
     } else
 
-    if (bmi >= 16 && bmi < 17) {
+    if (bmi >= 16 && bmi < 17) 
+    {
       setMessage('Moderate Thinness. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
-    
+    }
+
     if (bmi >= 17 && bmi < 18.5) {
       setMessage('Mild Thinness. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
@@ -52,7 +53,8 @@ export default function App(){
     }
   }
 
-  function resetInput(){
+  function resetInput()
+  {
     window.location.reload();
   }
 
