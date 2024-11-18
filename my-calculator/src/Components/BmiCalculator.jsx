@@ -1,102 +1,86 @@
-import React, { useReducer } from 'react';
+import { useState } from 'react';
 import './BmiCalculator.css';
 
+export default function App(){
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [message, setMessage] = useState('');
+  const [bmi, setBMI] = useState('');
 
-const initialState = {
-  weight: '',
-  height: '',
-  bmi: null,
-  status: ''
-};
+  function calculateBMI() {
+    const h = height / 100;
+    const bmi = weight / (h * h);
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_WEIGHT':
-      return { ...state, weight: action.payload };
-    case 'SET_HEIGHT':
-      return { ...state, height: action.payload };
-    case 'SET_BMI':
-      return { ...state, bmi: action.payload };
-    case 'SET_STATUS':
-      return { ...state, status: action.payload };
-    case 'RESET':
-      return initialState;
-    default:
-      return state;
+    if (bmi < 16) {
+      setMessage('Severe Thinness. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+
+    if (bmi >= 16 && bmi < 17) {
+      setMessage('Moderate Thinness. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+    
+    if (bmi >= 17 && bmi < 18.5) {
+      setMessage('Mild Thinness. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+
+    if (bmi >= 18.5 && bmi < 25) {
+      setMessage('Healthy weight. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+    
+    if (bmi >= 25 && bmi < 30) {
+      setMessage('Overweight. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+    
+    if (bmi >= 30 && bmi < 35) {
+      setMessage('Obese Class I. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+
+    if (bmi >= 35 && bmi < 40) {
+      setMessage('Obese Class II. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    } else
+
+    if (bmi >= 40) {
+      setMessage('Obese Class III. ')
+      setBMI('Your BMI is ' + bmi.toFixed(2));
+    }
   }
-};
 
-const BmiCalculator = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { weight, height, bmi, status } = state;
+  function resetInput(){
+    window.location.reload();
+  }
 
-  const calculateBMI = () => 
-  {
-    if (!weight || !height) 
-    {
-      alert('Please enter both weight and height!');
-      return;
-    }
-
-    const heightInMeters = parseFloat(height) / 100;
-    const bmiValue = (parseFloat(weight) / (heightInMeters * heightInMeters)).toFixed(2);
-    dispatch({ type: 'SET_BMI', payload: bmiValue });
-
-    let bmiStatus = '';
-    if (bmiValue < 18.5) 
-    {
-      bmiStatus = 'Underweight';
-    } 
-    else if (bmiValue < 24.9) 
-    {
-      bmiStatus = 'Normal weight';
-    } 
-    else if (bmiValue < 29.9) 
-    {
-      bmiStatus = 'Overweight';
-    } 
-    else 
-    {
-      bmiStatus = 'Obesity';
-    }
-
-    dispatch({ type: 'SET_STATUS', payload: bmiStatus });
-  };
-
-  return (
-    <div className='container'>
+  return(
+    <div className="app">
       <h1>BMI Calculator</h1>
-      <div className='input-group'>
-        <label>
-          Weight (kg):
-          <input
-            type="number"
-            value={weight}
-            onChange={(e) => dispatch({ type: 'SET_WEIGHT', payload: e.target.value })}
-            placeholder='Enter your weight'
-          />
-        </label>
-      </div>
-      <div className='input-group'>
-        <label>
-          Height (cm):
-          <input
-            type="number"
-            value={height}
-            onChange={(e) => dispatch({ type: 'SET_HEIGHT', payload: e.target.value })}
-            placeholder='Enter your height'
-          />
-        </label>
-      </div>
-      <button onClick={calculateBMI}>Calculate</button>
-      {bmi && (
-        <div className='result'>
-          <h3>Your BMI: {bmi}</h3>
-          <h3>Status: {status}</h3>
-        </div>
-      )}
-    </div>
-  );
-};
+      <h2>Type the values below</h2>
+      
+      <div className="area-input">
+        <input
+          value={weight}
+          type="text"
+          placeholder="Weight (in kg)"
+          onChange={ (e) => setWeight(e.target.value)}
+        />
 
-export default BmiCalculator;
+        <input
+          value={height}
+          type="text"
+          placeholder="Height (in cm)"
+          onChange={ (e) => setHeight(e.target.value)}
+        />
+        <button onClick={calculateBMI}>
+          Calculate
+        </button>
+        <button type="reset" onClick={resetInput}>Reset</button>
+      </div>
+      <h2> {message} {bmi} </h2>
+    </div>
+  )
+}
