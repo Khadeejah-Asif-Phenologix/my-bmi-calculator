@@ -55,7 +55,10 @@ export default function App(){
 
   function resetInput()
   {
-    window.location.reload();
+    setWeight('');
+    setHeight('');
+    setMessage('');
+    setBMI('');
   }
 
   return(
