@@ -25,27 +25,27 @@ export default function App(){
     if (bmi >= 17 && bmi < 18.5) {
       setMessage('Mild Thinness. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    }
 
     if (bmi >= 18.5 && bmi < 25) {
       setMessage('Healthy weight. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    } 
     
     if (bmi >= 25 && bmi < 30) {
       setMessage('Overweight. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    }
     
     if (bmi >= 30 && bmi < 35) {
       setMessage('Obese Class I. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    }
 
     if (bmi >= 35 && bmi < 40) {
       setMessage('Obese Class II. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    }
 
     if (bmi >= 40) {
       setMessage('Obese Class III. ')
