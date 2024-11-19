@@ -14,7 +14,7 @@ export default function App(){
     if (bmi < 16) {
       setMessage('Severe Thinness. ')
       setBMI('Your BMI is ' + bmi.toFixed(2));
-    } else
+    }
 
     if (bmi >= 16 && bmi < 17) 
     {
